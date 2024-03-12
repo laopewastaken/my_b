@@ -1,0 +1,40 @@
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[LAOPE]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib\media\favicon.png</url><title>LAOPE</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 12 Mar 2024 18:22:36 GMT</lastBuildDate><atom:link href="lib\rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 12 Mar 2024 18:22:36 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[LAOPE]]></title><description><![CDATA[ 
+ <br><br><br><br>
+<br><a data-href="Marcadores" href="marcadores.html" class="internal-link" target="_self" rel="noopener">Marcadores</a>
+<br><br><br>
+<br><a data-tooltip-position="top" aria-label="Jellyfin > Libreria de Medios Personalizada" data-href="Jellyfin#Libreria de Medios Personalizada" href="jellyfin.html#Libreria_de_Medios_Personalizada" class="internal-link" target="_self" rel="noopener">Libreria de Medios Personalizada</a>
+<br><a data-tooltip-position="top" aria-label="Jellyfin > Cambiar el titulo de la ventana de Jellyfin" data-href="Jellyfin#Cambiar el titulo de la ventana de Jellyfin" href="jellyfin.html#Cambiar_el_titulo_de_la_ventana_de_Jellyfin" class="internal-link" target="_self" rel="noopener">Cambiar el titulo de la ventana de Jellyfin</a>
+<br><br><br>
+<br>GBStudio quirks
+<br>Phoenix Wright Original Game
+<br>Professor Layton &amp; The Curious Village Demake 
+<br><br>
+<br>Profesor Layton Undub
+]]></description><link>index.html</link><guid isPermaLink="false">index.md</guid><pubDate>Tue, 12 Mar 2024 18:21:57 GMT</pubDate></item><item><title><![CDATA[Jellyfin]]></title><description><![CDATA[ 
+ <br><br><br>11-03-2024<br>Jellyfin utiliza imágenes con Relación de Aspecto de 16:9 para crear las tarjetas de imagen de la Librería de Medios que vemos al abrir la aplicación.<br>
+Estas imágenes son creadas automáticamente, Jellyfin elige una imagen al azar en la librería y agrega el titulo de esta encima.<br><br>Personalizar estas imagenes es simple:<br>
+<br>Sabemos que Jellyfin utiliza imagenes con un AR<a href="about:blank#fn-1-d361524a12b6e27f" class="footnote-link" target="_self" rel="noopener">[1]</a> de 16:9
+<br>Podemos utilizar imagenes estaticas o animadas.
+<br>En este cazo utilizare Cinemagraphs<a href="about:blank#fn-2-d361524a12b6e27f" class="footnote-link" target="_self" rel="noopener">[2]</a> de peliculas y series de TV.<br>
+Un buen sitio para buscar cinemagraphs es reddit, podemos partir buscando en <a data-tooltip-position="top" aria-label="https://www.reddit.com/r/Cinemagraphs/" rel="noopener" class="external-link" href="https://www.reddit.com/r/Cinemagraphs/" target="_blank">r/Cinemagraphs</a> y en <a data-tooltip-position="top" aria-label="https://www.reddit.com/r/perfectloops/" rel="noopener" class="external-link" href="https://www.reddit.com/r/perfectloops/" target="_blank">r/perfectloops</a>.<br>Para este ejemplo elegí este cinemagraph de Morpheus.<br><br>El tamaño de la imagen es mas grande de lo que necesitamos, además su AR no es de 16:9, todo esto lo corregiremos en el editor de imágenes. (e.g. Photoshop, GIMP, etc.)<br>Primero que nada debemos ajustar tanto el tamaño y AR del cinemagraph. Para esto debemos elegir un tamaño que se vea bien en una TV en 4K y sea 16:9. Este numero magico es 960x540 pixeles.<br>Para cambiar la Relacion de Aspecto:<br>
+<br>En photoshop vamos a Image -&gt; Canvas Size -&gt; en Width cambiar el tamaño actual, en este caso de 1286 a 960. en Height el tamaño actual es 536, inferior a los 540 que necesitamos, pero como son solo 4 pixeles no importa mucho asi que vamos a cambiar el Height a 540.
+<br>Ahora que la imagen esta en 16:9 solo queda un problema, esos 4 pixeles transparentes arriba y abajo de la imagen. En este caso hay 3 posibles soluciones:
+
+<br>Dejar la imagen así. con 4 pixeles transparentes.
+<br>Agregar un fondo negro: creamos un Layer, lo movemos abajo de la lista de Layers y lo pintamos negro.
+<br>Agrandar la imagen: antes de cambiar el AR a 16:9 agrandamos la imagen en 4 pixeles de Alto, quedando en 1296x540 y luego cambiar el AR a 960x540.
+
+
+<br>En nuestro caso elegiremos la opción 1, dejar la imagen así, ya que 4 pixeles no se notan. :)<br>Podemos terminar y subir el Cinemagraph (en formato .GIF) y dejar que Jellyfin se encargue del titulo, o podemos agregar el titulo nosotros y optimizar el peso de la imagen ocupando un formato mas moderno.<br>La elección de la fuente es a gusto, en mis imágenes uso Futura con el estilo Bold Oblique. El texto principal tendrá un tamaño de 120pt y el sub-texto un tamaño de 60pt.<br>
+Los Layers de texto deben estar por encima de todos los demás Layers para que esten visible en todos los frames de animación. <br><br>La opacidad del texto es de 75% y el blend mode del Layer debe cambiarse a Exclusion para que se vea el fondo de la imagen con colores invertidos. La sombra del texto e un Drop Shadow, blend mode Multiply, opacidad 75%, angulo de sombra 90°, distancia 15px, tamaño 2px.<br>Ahora guardamos el archivo en formato y lo subimos a Jellyfin sin problemas, pero este .GIF pesa 2.23MB! ¿Por qué no optimizar el archivo y reducir su tamaño a 1:22 de su original? <br>Afortunadamente Jellyfin acepta archivos en formato AV1F<a href="about:blank#fn-3-d361524a12b6e27f" class="footnote-link" target="_self" rel="noopener">[3]</a>, este nuevo formato basado en AV1 muy eficiente y reducirá el tamaño mas de un 90%. Solo queda convertir el gif a av1f con cualquier convertidor online (e.g. <a data-tooltip-position="top" aria-label="https://ezgif.com/gif-to-avif/" rel="noopener" class="external-link" href="https://ezgif.com/gif-to-avif/" target="_blank">ezgif</a>)<br><br><br><br><br><br><br>11-03-2024<br>
+Este cambio solo funciona en la version web de Jellyfin.<br>
+<br>busca en tu la carpeta de jellyfin /jellyfin/web/ el archivo llamado main.jellyfin.bundle.js y abrelo con un editor de texto. (e.g. <a data-tooltip-position="top" aria-label="https://notepad-plus-plus.org/" rel="noopener" class="external-link" href="https://notepad-plus-plus.org/" target="_blank">Notepad++</a>)
+<br>busca las lineas document.title="Jellyfin" , document.title=e||"Jellyfin" y reemplaza Jellyfin por el nombre que quieras.
+<br>guarda los cambios y reinicia el servidor de Jellyfin. 
+<br>
+<br>
+<br>Aspect Ratio: Relacion de Aspecto de una imagen segun su Ancho/Alto.<a href="about:blank#fnref-1-d361524a12b6e27f" class="footnote-backref footnote-link" target="_self" rel="noopener">↩︎</a>
+<br>Cinemagraph: es una imagen que combina fotografía fija con video activo para crear una imagen que contiene un pequeño elemento en movimiento mientras que el resto está congelado.<a href="about:blank#fnref-2-d361524a12b6e27f" class="footnote-backref footnote-link" target="_self" rel="noopener">↩︎</a>
+<br>AV1F: (AV1 Image File Format) es una especificacion de formato de archivo de imagen abierto, sin royalties para guardar imagenes comprimidas en formato AV1.<a href="about:blank#fnref-3-d361524a12b6e27f" class="footnote-backref footnote-link" target="_self" rel="noopener">↩︎</a>
+]]></description><link>jellyfin.html</link><guid isPermaLink="false">Jellyfin.md</guid><pubDate>Tue, 12 Mar 2024 18:20:13 GMT</pubDate><enclosure url="images\jellyfin_demo.png" length="0" type="image/png"/><content:encoded>&lt;figure&gt;&lt;img src="images\jellyfin_demo.png"&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Marcadores]]></title><description><![CDATA[ 
+ <br><br>]]></description><link>marcadores.html</link><guid isPermaLink="false">Marcadores.md</guid><pubDate>Tue, 12 Mar 2024 02:03:10 GMT</pubDate></item></channel></rss>
